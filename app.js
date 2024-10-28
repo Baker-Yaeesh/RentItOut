@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoutes');
 const itemRoutes = require('./routes/itemRoutes');
+const logisticsRoutes = require('./routes/logisticsRoutes');  
 const errorHandler = require('./middleware/errorHandler'); 
 const cors = require('cors');
 const db = require('./config/db');  
@@ -14,8 +15,7 @@ app.use(errorHandler);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/items', itemRoutes);
- 
-
+app.use('/api/logistics', logisticsRoutes); 
 
  
 const PORT = process.env.PORT || 3000;
