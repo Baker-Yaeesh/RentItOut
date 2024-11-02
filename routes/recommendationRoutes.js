@@ -8,13 +8,14 @@ const authMiddleware = require('../middleware/authMiddleware');
 router.use(authMiddleware);
 
  
-router.get('/user/:userId', authMiddleware,recommendationController.getRecommendationsForUser);
+router.get('/user/:id', authMiddleware,recommendationController.getRecommendationsForUser);
 
  
 router.post('/', authMiddleware,recommendationController.createRecommendation);
 
  
-router.get('/:id',authMiddleware, recommendationController.getRecommendationById);
+router.get('/:id', authMiddleware, recommendationController.getRecommendationById);
+
 
  
 router.put('/:id',authMiddleware, recommendationController.updateRecommendation);
