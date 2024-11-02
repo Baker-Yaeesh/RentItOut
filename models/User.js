@@ -9,8 +9,24 @@ class User {
         return user[0];
     }
     static async delete(userId) {
+        
+        await db.execute('DELETE FROM reviews WHERE user_id = ?', [userId]);
+        
+    
+        await db.execute('DELETE FROM items WHERE user_id = ?', [userId]);
+        
+        
+        await db.execute('DELETE FROM rentals WHERE user_id = ?', [userId]);
+        
+        await db.execute('DELETE FROM revenue WHERE rental_id IN (SELECT rental_id FROM rentals WHERE user_id = ?)', [userId]);
+        
+       
+        await db.execute('DELETE FROM logistics WHERE rental_id IN (SELECT rental_id FROM rentals WHERE user_id = ?)', [userId]);
+    
+    
         await db.execute('DELETE FROM users WHERE user_id = ?', [userId]);
     }
+    
    
      static async update(userId, userData) {
         const { name, email, phone_number, address } = userData;
