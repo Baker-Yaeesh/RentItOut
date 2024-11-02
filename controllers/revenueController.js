@@ -1,6 +1,6 @@
   
 const db = require('../config/db');
-
+const Revenue = require('../models/Revenue')
  
 exports.getAllRevenue = async (req, res) => {
     try {
@@ -47,29 +47,28 @@ exports.createRevenue = async (req, res) => {
         console.error('Error creating revenue:', error);
         res.status(500).json({ message: 'Error creating revenue', error });
     }
-};
+}; 
 
  
 exports.updateRevenue = async (req, res) => {
     const { id } = req.params;
-    const { rental_id, platform_fee, insurance_fee, total_income } = req.body;
+    const { platform_fee, insurance_fee, total_income } = req.body;
 
     try {
-        const query = 'UPDATE revenue SET rental_id = ?, platform_fee = ?, insurance_fee = ?, total_income = ? WHERE revenue_id = ?';
-        const [result] = await db.query(query, [rental_id, platform_fee, insurance_fee, total_income, id]);
+        const query = 'UPDATE revenue SET platform_fee = ?, insurance_fee = ?, total_income = ? WHERE revenue_id = ?';
+        const [result] = await db.query(query, [platform_fee, insurance_fee, total_income, id]);
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Revenue not found or no changes made' });
+            return res.status(404).json({ message: 'Revenue not found' });
         }
 
-        res.status(200).json({ message: 'Revenue entry updated' });
+        res.status(200).json({ message: 'Revenue updated successfully' });
     } catch (error) {
         console.error('Error updating revenue:', error);
         res.status(500).json({ message: 'Error updating revenue', error });
     }
 };
 
- 
 exports.deleteRevenue = async (req, res) => {
     const { id } = req.params;
 
