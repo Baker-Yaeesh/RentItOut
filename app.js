@@ -19,12 +19,14 @@ app.use(errorHandler);
  
 app.use('/api', userRoutes);
 app.use('/api/revenue', revenueRoutes);
+app.use('/revenue', revenueRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/items', itemRoutes);
 app.use('/api/rentals', rentalRoutes);
 app.use('/api/reviews', reviewRoutes); 
 app.use('/api/logistics', logisticsRoutes); 
 app.use('/api/recommendations', recommendationRoutes); 
+ 
 
  
 const PORT = process.env.PORT || 3000;

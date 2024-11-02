@@ -37,7 +37,7 @@ const Revenue = {
             callback(null, results[0]);
         });
     },
-
+  
     update: (id, data, callback) => {
         const { platform_fee, insurance_fee, total_income } = data;
         db.query(
@@ -54,7 +54,6 @@ const Revenue = {
             }
         );
     },
-
     delete: (id, callback) => {
         db.query('DELETE FROM revenue WHERE revenue_id = ?', [id], (err, results) => {
             if (err) {
