@@ -1,8 +1,8 @@
  const Recommendation = require('../models/Recommendation');
 
- 
-exports.getRecommendationsForUser = async (req, res) => {
-    const userId = req.user.userId; 
+ exports.getRecommendationsForUser = async (req, res) => {
+    const userId = req.params.id;   
+   // console.log("User ID from URL:", userId);
 
     try {
         const recommendations = await Recommendation.getByUserId(userId);
@@ -12,6 +12,11 @@ exports.getRecommendationsForUser = async (req, res) => {
         res.status(500).json({ message: 'Error fetching recommendations', error });
     }
 };
+
+
+
+
+
  
 exports.createRecommendation = async (req, res) => {
     const userId = req.user.userId; 
